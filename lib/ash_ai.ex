@@ -530,7 +530,7 @@ defmodule AshAi do
                   end
                 end)
                 |> then(fn query ->
-                  if arguments && Map.has_key?(arguments, "filter") do
+                  if Map.has_key?(arguments, "filter") do
                     Ash.Query.filter_input(query, arguments["filter"])
                   else
                     query
@@ -538,7 +538,7 @@ defmodule AshAi do
                 end)
                 |> Ash.Query.for_read(action.name, input, opts)
                 |> then(fn query ->
-                  result_type = (arguments && arguments["result_type"]) || "run_query"
+                  result_type = arguments["result_type"] || "run_query"
 
                   case result_type do
                     "run_query" ->
